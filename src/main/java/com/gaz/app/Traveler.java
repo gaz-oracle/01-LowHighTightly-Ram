@@ -3,13 +3,13 @@ package com.gaz.app;
 public class Traveler {
     //Create a intance inside Constructor:
 
-    Car car = null;
+    public IVehicle vehicle;
 
-    public Traveler(){
-        this.car = new Car();
+    public Traveler(IVehicle vehicle){
+        this.vehicle = vehicle;
     }
 
     public void starJourney(){
-        this.car.move();
+        this.vehicle.move();
     }
 }
