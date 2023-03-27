@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Client {
-    //new branch Dev4
+    //new branch Dev5 - 15. Anotaciones estereotipadas
     public static void main(String[] args) {
 
         ApplicationContext applicationContext =
@@ -13,7 +13,7 @@ public class Client {
         Byke byke =  applicationContext.getBean(Byke.class);
         Cycle cycle = applicationContext.getBean(Cycle.class);
         Traveler traveler = applicationContext.getBean(Traveler.class);
-        // Retrieve Spring Beans from Spring IOC Container
+
         car.move();
         byke.move();
         cycle.move();
