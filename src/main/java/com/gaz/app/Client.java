@@ -13,7 +13,7 @@ public class Client {
         Byke byke =  applicationContext.getBean(Byke.class);
         Cycle cycle = applicationContext.getBean(Cycle.class);
         Traveler traveler = applicationContext.getBean(Traveler.class);
-        // Retrieve Spring Beans from Spring IOC Container
+
         car.move();
         byke.move();
         cycle.move();
