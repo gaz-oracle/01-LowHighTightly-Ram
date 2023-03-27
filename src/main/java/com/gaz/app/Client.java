@@ -4,13 +4,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Client {
-    //new branch Dev3
+    //new branch Dev4
     public static void main(String[] args) {
-        /*
-        1. Creat¡ng Spring IOC Container.
-        2. Read the configuration class.
-        3. Create and manage the Spring Beans
-         */
+
         ApplicationContext applicationContext =
                 new AnnotationConfigApplicationContext(AppConfiguration.class);
         Car car = applicationContext.getBean(Car.class);
