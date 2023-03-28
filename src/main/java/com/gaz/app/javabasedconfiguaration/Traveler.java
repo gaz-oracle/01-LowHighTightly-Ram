@@ -1,4 +1,4 @@
-package com.gaz.app;
+package com.gaz.app.javabasedconfiguaration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
