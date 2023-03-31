@@ -8,7 +8,8 @@ public class MessageSender {
         this.iMessageService = iMessageService;
     }
 
-    public void sendMessage_sender(String message){
+    public void sendMessage(String message){
+
         this.iMessageService.sendMessage(message);
     }
 }
