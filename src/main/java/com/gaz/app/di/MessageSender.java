@@ -2,14 +2,13 @@ package com.gaz.app.di;
 
 public class MessageSender {
 
-    //private  SMSService smsService;
-    private EmailService emailService;
+    private IMessageService iMessageService;
 
-    public MessageSender(EmailService emailService) {
-        this.emailService = emailService;
+    public MessageSender(IMessageService iMessageService) {
+        this.iMessageService = iMessageService;
     }
 
     public void sendMessage_sender(String message){
-        this.emailService.sendMessage_Email(message);
+        this.iMessageService.sendMessage(message);
     }
 }

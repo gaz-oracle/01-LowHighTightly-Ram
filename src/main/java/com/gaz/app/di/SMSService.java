@@ -1,8 +1,9 @@
 package com.gaz.app.di;
 
-public class SMSService {
+public class SMSService implements IMessageService {
 
-    public void sendMessage_service(String message){
+    @Override
+    public void sendMessage(String message){
         System.out.println(message);
     }
 }
