@@ -11,22 +11,6 @@ public class Client {
         MessageSender messageSender = applicationContext.getBean(MessageSender.class);
         messageSender.sendMessage(message);
 
-        /* No se han creado Instancias de las clases, usando spring boot, que las ha creado automaticamente e
-        Inyectado las dependencias entre los Objetos( solamnete el objeto de la ApplicationContext, para manejar
-        y crear los bean en el Contenedor de Spring
-
-        SMSService smsService = new SMSService();
-        EmailService emailService = new EmailService();
-        MessageSender messageSender = new MessageSender(smsService);
-        //MessageSender messageSender = new MessageSender(emailService);
-        messageSender.sendMessage(message);
-         */
-
-
-
-
-
-
     }
 
 }

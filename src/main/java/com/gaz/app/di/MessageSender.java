@@ -14,7 +14,7 @@ public class MessageSender {
     private IMessageService iMessageService;
 
      @Autowired
-    public MessageSender(@Qualifier("emailService") IMessageService iMessageService) {
+    public MessageSender(IMessageService iMessageService) {
         this.iMessageService = iMessageService;
     }
 
