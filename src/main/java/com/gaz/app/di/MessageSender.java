@@ -6,18 +6,19 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MessageSender {
-    private IMessageService iMessageService;
-    private IMessageService ismsService;
-   @Autowired
-    public void setiMessageService(@Qualifier ("emailService") IMessageService iMessageService) {
-        this.iMessageService = iMessageService;
-        System.out.println("ID FROM Setter 1!");
-    }
+    /**
+     * 1. No requiere crear Construtores y Metodos Setter.
+     * 2. Spring NO recomienda este tipo de Inyeccion.
+     *
+     */
     @Autowired
-    public void setSmsService(@Qualifier ("emailService")IMessageService smsService) {
-        this.ismsService = smsService;
-        System.out.println("ID FROM Setter 2!");
-    }
+    @Qualifier("emailService")
+    private IMessageService iMessageService;
+
+    @Autowired
+    @Qualifier("sMSService")
+    private IMessageService ismsService;
+
     public void sendMessage(String message){
         this.iMessageService.sendMessage(message);
         this.ismsService.sendMessage(message);
