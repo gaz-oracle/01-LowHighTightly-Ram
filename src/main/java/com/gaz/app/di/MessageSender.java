@@ -7,21 +7,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageSender {
     private IMessageService iMessageService;
-    private IMessageService smsService;
-
-    // @Autowired //Se le dice expliciatamante a El Contenedor de Spring que  use el constructor para inyectar la dependencia.
-    public MessageSender( IMessageService iMessageService) {
+    private IMessageService ismsService;
+   @Autowired
+    public void setiMessageService(@Qualifier ("emailService") IMessageService iMessageService) {
         this.iMessageService = iMessageService;
-         System.out.println("From --> Constructor based dependency Injection 1");
+        System.out.println("ID FROM Setter 1!");
     }
-     @Autowired
-    public MessageSender(IMessageService iMessageService, IMessageService smsService ) {
-        this.iMessageService = iMessageService;
-        this.smsService = smsService;
-        System.out.println("From --> Constructor based dependency Injection 2");
+    @Autowired
+    public void setSmsService(@Qualifier ("emailService")IMessageService smsService) {
+        this.ismsService = smsService;
+        System.out.println("ID FROM Setter 2!");
     }
     public void sendMessage(String message){
         this.iMessageService.sendMessage(message);
-        this.smsService.sendMessage(message);
+        this.ismsService.sendMessage(message);
     }
 }
