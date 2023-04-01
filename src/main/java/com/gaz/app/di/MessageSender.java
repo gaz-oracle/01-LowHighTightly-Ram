@@ -4,22 +4,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-// @Component: Anotacion de spring que crea los objetos de la clase en cuestion,
-// Yadministra su ciclo de vida
-// @Autowire : le dice a Spring que inyecte los objetos de manera automática,
-//  a otros objetos de otras clases,en este caso por medio del CONTRUCTUCTOR.
 @Component
 public class MessageSender {
-
     private IMessageService iMessageService;
+    private IMessageService smsService;
 
-     @Autowired
-    public MessageSender(IMessageService iMessageService) {
+    // @Autowired //Se le dice expliciatamante a El Contenedor de Spring que  use el constructor para inyectar la dependencia.
+    public MessageSender( IMessageService iMessageService) {
         this.iMessageService = iMessageService;
+         System.out.println("From --> Constructor based dependency Injection 1");
     }
-
+     @Autowired
+    public MessageSender(IMessageService iMessageService, IMessageService smsService ) {
+        this.iMessageService = iMessageService;
+        this.smsService = smsService;
+        System.out.println("From --> Constructor based dependency Injection 2");
+    }
     public void sendMessage(String message){
-
         this.iMessageService.sendMessage(message);
+        this.smsService.sendMessage(message);
     }
 }
