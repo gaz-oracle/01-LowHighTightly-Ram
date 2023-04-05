@@ -23,6 +23,14 @@ class Student {
         /** SE LLAMA AL OBJETO (O SE INYECTA EL OBJETO address), PARA QUE EJECTE EL METODO .print() --> **/
         address.print();
     }
+
+    private void init() {
+        System.out.println("Initialization logic");
+    }
+
+    private void destroy() {
+        System.out.println("Destruction   logic");
+    }
 }
 
 class Address {
@@ -35,12 +43,12 @@ class Address {
 @Configuration
 class AppConfig {
 
-    @Bean
+    @Bean(name = "@Bean Address")
     public Address address() {
         return new Address();
     }
 
-    @Bean
+    @Bean(name = "@Bean Student", initMethod = "init", destroyMethod = "destroy")
     public Student student() {
         return new Student(address()); /** <-- INYECCION DE OBJETO A OTRO OBJETO A TRAVES DE SPIRNG IoC **/
     }
@@ -61,21 +69,28 @@ public class BeanAnnotation {
      */
 
     public static void main(String[] args) {
+
+
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-        Student student = applicationContext.getBean(Student.class);
+       // Student student = applicationContext.getBean(Student.class);
+        /**
+         * SE PUEDE CAMBIAR EL NOMBRE DE LOS BEANs **/
+        Student student = (Student) applicationContext.getBean("@Bean Student");
         student.print();
 
         /**
          * DE FORMA PREDETERMINADA EL CONTENEDOR DE SPRING LES DA UN NOMBRE POR DEFAULT A LOS BEANS IGUAL QUE EL NOMBRE DE LOS METODOS
          * VAMOS A IMPRIMIR EL NOMBRE DE LOS METODOS: **/
 
-        System.out.println("********** NAMES BEANS ***************");
+        System.out.println("**********Initialization logic ***************");
         String [] beanNames = applicationContext.getBeanDefinitionNames();
         for (String i:beanNames) {
             System.out.println(i);
         }
-        /**
-         * SE PUEDE CAMBIAR EL NOMBRE DEL BEAN **/
+/**
+ * Initialization logic: significa que el contenedor de spring llama al metodo: init, cada vez que comienza a admnistrar
+ * el objeto de Student (@Bean Student)
+ */
 
     }
 }
