@@ -65,6 +65,17 @@ public class BeanAnnotation {
         Student student = applicationContext.getBean(Student.class);
         student.print();
 
+        /**
+         * DE FORMA PREDETERMINADA EL CONTENEDOR DE SPRING LES DA UN NOMBRE POR DEFAULT A LOS BEANS IGUAL QUE EL NOMBRE DE LOS METODOS
+         * VAMOS A IMPRIMIR EL NOMBRE DE LOS METODOS: **/
+
+        System.out.println("********** NAMES BEANS ***************");
+        String [] beanNames = applicationContext.getBeanDefinitionNames();
+        for (String i:beanNames) {
+            System.out.println(i);
+        }
+        /**
+         * SE PUEDE CAMBIAR EL NOMBRE DEL BEAN**/
 
     }
 }
