@@ -7,20 +7,15 @@ import org.springframework.context.annotation.Configuration;
 
 
 class Student {
-    /**
-     * La Clase Student DEPENDE de la clase Address.
-     */
 
     private Address address;
-    /**   Comprobando si la Dependencia Address se inyecta al Objecto Student...
-     *    Se llama a los Metodos de la clase Address dentro del metodo print() --> **/
+
     public Student(Address address) {
         this.address = address;
     }
 
     public void print() {
         System.out.println("Student class method called...");
-        /** SE LLAMA AL OBJETO (O SE INYECTA EL OBJETO address), PARA QUE EJECTE EL METODO .print() --> **/
         address.print();
     }
 
@@ -29,7 +24,7 @@ class Student {
     }
 
     private void destroy() {
-        System.out.println("Destruction   logic");
+        System.out.println("Destruction logic");
     }
 }
 
@@ -50,48 +45,25 @@ class AppConfig {
 
     @Bean(name = "@Bean Student", initMethod = "init", destroyMethod = "destroy")
     public Student student() {
-        return new Student(address()); /** <-- INYECCION DE OBJETO A OTRO OBJETO A TRAVES DE SPIRNG IoC **/
+        return new Student(address());
     }
-    /**
-     * Para crear un @Bean de tipo Addres , se hace:
-     * A. Crear un metodo de la clase Address publico
-     * B. Que devuelve la creacion de un objeto (@Bean) de la clase Address.
-     * C. Se le informa al Contenedor de Spring (IoC), que adminsitre el Objeto de la clase Address,para lo cual se
-     *    utiliza la anotacción @Bean
-     * D. Por lo tanto este metodo Address devuelve un objeto Address de la clase Address.
-     *   - Aplica lo mismo para la clase Student.
-     */
+
 }
 
 public class BeanAnnotation {
-    /**
-     * RECUPERACION DE LOS @BEANS DEL CONTENEDOR DE SPRING
-     */
 
     public static void main(String[] args) {
 
+        try(var applicationContext = new AnnotationConfigApplicationContext(AppConfig.class) ) {
 
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-       // Student student = applicationContext.getBean(Student.class);
-        /**
-         * SE PUEDE CAMBIAR EL NOMBRE DE LOS BEANs **/
-        Student student = (Student) applicationContext.getBean("@Bean Student");
-        student.print();
-
-        /**
-         * DE FORMA PREDETERMINADA EL CONTENEDOR DE SPRING LES DA UN NOMBRE POR DEFAULT A LOS BEANS IGUAL QUE EL NOMBRE DE LOS METODOS
-         * VAMOS A IMPRIMIR EL NOMBRE DE LOS METODOS: **/
-
-        System.out.println("**********Initialization logic ***************");
-        String [] beanNames = applicationContext.getBeanDefinitionNames();
-        for (String i:beanNames) {
-            System.out.println(i);
+            Student student = (Student) applicationContext.getBean("@Bean Student");
+            String [] beanNames = applicationContext.getBeanDefinitionNames();
+            for (String i:beanNames) {
+                System.out.println(i);
+            }
+            student.print();
         }
-/**
- * Initialization logic: significa que el contenedor de spring llama al metodo: init, cada vez que comienza a admnistrar
- * el objeto de Student (@Bean Student)
- */
-
+       // https://www.geeksforgeeks.org/spring-init-and-destroy-methods-with-example/
     }
 }
 
