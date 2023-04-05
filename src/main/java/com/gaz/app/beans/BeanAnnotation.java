@@ -35,12 +35,12 @@ class Address {
 @Configuration
 class AppConfig {
 
-    @Bean
+    @Bean(name = "@Bean Address")
     public Address address() {
         return new Address();
     }
 
-    @Bean
+    @Bean(name = "@Bean Student") /** TAMBIEN SE PUEDE ESSPECIFICAR VARIOS NOMBRES AL BEAN:  @Bean(name = {"@Bean Student1","@Bean Student2" })*/
     public Student student() {
         return new Student(address()); /** <-- INYECCION DE OBJETO A OTRO OBJETO A TRAVES DE SPIRNG IoC **/
     }
@@ -62,7 +62,10 @@ public class BeanAnnotation {
 
     public static void main(String[] args) {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-        Student student = applicationContext.getBean(Student.class);
+       // Student student = applicationContext.getBean(Student.class);
+        /**
+         * SE PUEDE CAMBIAR EL NOMBRE DE LOS BEANs **/
+        Student student = (Student) applicationContext.getBean("@Bean Student");
         student.print();
 
         /**
@@ -74,8 +77,7 @@ public class BeanAnnotation {
         for (String i:beanNames) {
             System.out.println(i);
         }
-        /**
-         * SE PUEDE CAMBIAR EL NOMBRE DEL BEAN **/
+
 
     }
 }
