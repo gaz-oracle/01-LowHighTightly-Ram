@@ -75,7 +75,7 @@ public class BeanAnnotation {
             System.out.println(i);
         }
         /**
-         * SE PUEDE CAMBIAR EL NOMBRE DEL BEAN**/
+         * SE PUEDE CAMBIAR EL NOMBRE DEL BEAN **/
 
     }
 }
